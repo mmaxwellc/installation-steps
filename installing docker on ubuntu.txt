@@ -1,0 +1,52 @@
+Install docker on Ubuntu
+
+1. using repository
+
+#sudo apt-get update
+#sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+
+#curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+#echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+
+#sudo apt-get update
+#sudo apt-get install docker-ce docker-ce-cli containerd.io   OR
+Install specific version : # apt-cache madison docker-ce
+
+#sudo docker run hello-world
+
+
+
+EXTRA
+
+#sudo apt install docker.io
+#sudo apt install docker-compose
+
+when you have the app/file in your server, then
+
+cd to the location and :
+#sudo docker-compose build
+#sudo docker-compose up
+
+
+
+MORE POINTS
+
+build dockerfile to create image
+
+#docker build <location where the folder is>  OR
+#docker buld . - if already in the folder  OR
+#docker build -t <imageName/tagName:version 'location of Dockerfile> EG
+#docker build -t myimage1:1.0 .     - tagging the image
+
+run image to create container
+#docker images 
+
+#docker run <image id>

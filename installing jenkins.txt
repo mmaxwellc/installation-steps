@@ -1,0 +1,54 @@
+
+check if java is installed
+#java -version
+
+update packages
+#sudo yum update –y
+
+install java
+#sudo yum install java-1.8.0
+
+setup packages for jenkins- will download jenkin's latest code package
+#sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+
+
+Import a key file from Jenkins CI to enable installation from the package
+#sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+install jenkins
+sudo yum install jenkins 
+
+if gives error:( Package: jenkins-2.303.2-1.1.noarch (jenkins)Requires: daemonize)
+
+do this (install the Daemonize from the Epel repository which is the extra package for enterprise linux)
+# sudo yum install epel-release -y  (sudo amazon-linux-extras install epel)
+ # sudo yum install daemonize -y  
+ Than you can continue on installing the Jenkins as  
+ # sudo yum install jenkins -y  
+
+if error - (Public key for jenkins-2.303.2-1.1.noarch.rpm is not installed)
+Correct public key URL can be found on Jenkins Redhat Packages page. Just run the command below to import it:
+#sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+start jenkins service
+#sudo service jenkins start
+
+access jenkins server on browser
+https://{ec2-instance-public-dns}:8080/
+
+unlock jenkins by providing admin password
+sudo su -
+
+cd /var/lib/jenkins/secrets/
+
+ls -a
+
+cat initialAdminPassword
+pass***
+
+install git on jenkins
+
+curl -v -X GET http://http://ec2-3-144-202-177.us-east-2.compute.amazonaws.com:8080/crumbIssuer/api/json --user <admin>:<4137682891884f0db3515d3f3e0d6294>
+
+

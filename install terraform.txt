@@ -1,0 +1,28 @@
+install terraform on amazon linux
+
+
+#sudo yum install -y yum-utils
+
+#sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+
+#sudo yum -y install terraform
+
+#terraform -v
+
+
+manual installation
+
+after downloading and unzipping 
+#echo $PATH
+
+Move the Terraform binary to one of the listed locations. This command assumes that the binary is currently in your downloads folder and that your PATH includes /usr/local/bin, but you can customize it if your locations are different.
+
+#mv ~/Downloads/terraform /usr/local/bin/
+
+#terraform -v
+
+enable autocomplete
+
+#touch ~/.bashrc
+#terraform -install-autocomplete
+

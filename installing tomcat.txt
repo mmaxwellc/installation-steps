@@ -1,0 +1,119 @@
+be in root
+#sudo su
+
+install java
+#yum install java-1.8* -y
+
+install tomcat
+
+install package for ec2
+#yum install wget -y
+
+
+download directly on your ec2 instance
+#wget <copied link from the .tar file>https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.56/bin/apache-tomcat-9.0.56.tar.gz
+
+#ls -l to confirm the file is there
+
+
+Unzip the .tar file
+#tar -zvxf <name of the file>
+
+#ls -l - check whether it unzipped
+
+enter the directory where it is downoaded
+#cd  apache-tomcat-9.0.33
+
+#ls -l
+#cd /bin
+
+check the permissions
+# ls -ltr 
+
+change the startup and shutdown services to executable
+# chmod +x startup.sh
+# chomd +x shutdown.sh
+#ls -l to make sure they can execute 
+
+Start the tomcat
+go to the tomcat bin folder
+# cd  apache-tomcat-9.0.33/bin
+# ./startup.sh
+
+shutdown
+#./shutdown.sh
+
+instead of the above, you can create a soft link with the path
+#echo $PATH 
+#ln -s /opt/apache-tomcat-8.5.31/bin/startup.sh /usr/local/bin/tomcatup
+with this configured, you can run the tomcatup to start the service
+
+#ln -s /opt/apache-tomcat-8.5.31/bin/shutdown.sh //usr/local/bin/tomcatdown
+
+start the service
+#tomcatup
+
+
+open the gui with the url on 8080
+
+change the port to 8089
+
+go back to tomcat directory
+# cd ..
+
+go to conf directory
+#cd conf
+#ls
+
+locate file server.xml where the port is defined and change to 8090 and ctrl s
+restart the service
+#nano server.xml
+
+restart service
+
+Add 8090 to ec2 security group
+
+from the gui, open the manager app (tells you you can only open it on the the machine running the tomcat)
+
+(modify the contex.xml
+find the contex.xml
+#find / -name context.xml
+
+copy the folder/path and edit
+#nano /<paste the copied path>
+
+comment the valve field with <!-- and close with -->
+do for the 4 folders and restart tomcat
+#tomcatdown
+#tomcatup)
+
+go edit the context.xml of the webapp folder>manager>hostmanager,manager>metainf folder
+#nano context.xml
+#ls -l
+comment the valve field with <!.. and close with ..>
+
+
+Refresh the gui connection and click the manger App
+
+it will ask for username/password
+
+on the conf location, locate a file called tomcat-users.xml
+you need to add users with roles
+#vi tomcat-users.xml
+
+paste between lines of tomcat-users
+
+<role rolename="manager-gui"/>
+<user username="admin" password="admin" roles="manger-gui"/>
+or
+<role rolename="manager-gui"/>
+<user username="tomcat" password="s3cret" roles="manager-gui"/>
+
+restart tomcat
+
+#cat tomcat-users.xml
+
+
+
+login to gui
+
